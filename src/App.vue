@@ -1,10 +1,17 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <Exercise/>
 </template>
+
+
+<script>
+import Exercise from './components/Exercise'
+
+export default {
+  name: 'App',
+  components: { Exercise }
+}
+
+</script>
 
 <style>
 #app {
