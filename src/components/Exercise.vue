@@ -1,36 +1,27 @@
 <template>
-<div>
-
-  <div id="exercise">
-      <label>Exercise: </label>
-      <input type="text" id="exerciseName" required v-model="newExercise.name" />
-      <label>Focus: </label>
-      <input id="exerciseType" required v-model="newExercise.type" />
-      <button id="saveButton" @click="addExercise">Add Exercise</button>
-  </div>
-
-  <div :key="`exercise-${exercise.id}`" v-for="exercise in exercises" :ref="`exerciseDiv-${exercise.id}`">
-    <hr/>
-    <div :class="{hidden: !exercise.isExerciseInEdit}">
-      <label >Exercise: </label>
-      <input type="text" id="exerciseName" required v-model ="exercise.name" />
-      <label >Focus: </label>
-      <input id="exerciseType" required v-model="exercise.type"/>
+  <div>
+    <div id="exercise">
+        <label>Exercise: </label>
+        <input type="text" id="exerciseName" required v-model="newExercise.name" />
+        <label>Focus: </label>
+        <input id="exerciseType" required v-model="newExercise.type" />
+        <button id="saveButton" @click="addExercise">Add Exercise</button>
     </div>
-    <h2>{{exercise.name}}</h2>
-    <h4>{{exercise.type}}</h4>
-    <Set v-model:sets="exercise.sets"/>
-    <button @click="removeExercise(exercise.id)">Remove</button>
-    <button id="editButton" @click="editExercise(exercise.id)">Edit</button>
-</div>
-    
-    <!-- <button @click="addExercise">Add Exercise</button>
-    <button @click="removeExercise">Remove Exercise</button> -->
-  
-
-
-</div>
-  
+    <div :key="`exercise-${exercise.id}`" v-for="exercise in exercises" :ref="`exerciseDiv-${exercise.id}`">
+      <hr/>
+      <div :class="{hidden: !exercise.isExerciseInEdit}">
+        <label >Exercise: </label>
+        <input type="text" id="exerciseName" required v-model ="exercise.name" />
+        <label >Focus: </label>
+        <input id="exerciseType" required v-model="exercise.type"/>
+      </div>
+      <h2>{{exercise.name}}</h2>
+      <h4>{{exercise.type}}</h4>
+      <Set v-model:sets="exercise.sets"/>
+      <button @click="removeExercise(exercise.id)">Remove</button>
+      <button id="editButton" @click="editExercise(exercise.id)">Edit</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -39,12 +30,6 @@ import Set from './Set.vue'
 export default {
     components: { Set },
     methods: {
-      addExercise() {
-        this.exercises.push({
-          exercise: '',
-          exerciseCounter: "exercise" 
-        });
-      },
       removeExercise(exerciseId) {
         // find exercise in this.exercises that exercise.id matches exerciseId
         // most popular array methods .map, .forEach. .filter, .reduce
@@ -72,15 +57,12 @@ export default {
         const exerciseInEdit = this.exercises.find(exercise => {
            return exercise.id == exerciseId
         });
-        console.log(this.$refs[`exerciseDiv-${exerciseId}`].children.editButton.innerText)
         exerciseInEdit.isExerciseInEdit = !exerciseInEdit.isExerciseInEdit
         if (exerciseInEdit.isExerciseInEdit == true) {
           this.$refs[`exerciseDiv-${exerciseId}`].children.editButton.innerText = "Save"
         } else {
           this.$refs[`exerciseDiv-${exerciseId}`].children.editButton.innerText = "Edit"
         }
-        // this.$refs.exerciseDiv-exerciseId.label.removeAttribute('hidden');
-        // this.$refs.exerciseDiv-exerciseId.input.removeAttribute('hidden');
       }
     },
     data() {
