@@ -1,17 +1,23 @@
-// import { createRouter, createWebHistory } from 'vue-router'
-// import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import Exercise from '../components/Exercise.vue'
+import Workouts from '../views/Workouts.vue'
 
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'Home',
-//     component: Home
-//   },
-// ]
+const routes = [
+  {
+    path: '/new-workout',
+    name: 'createWorkout',
+    component: Exercise
+  },
+  {
+    path: '/workouts',
+    name: 'viewWorkouts,
+    component: Workouts
+  }
+]
 
-// const router = createRouter({
-//   history: createWebHistory(process.env.BASE_URL),
-//   routes
-// })
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
 
-// export default router
+export default router

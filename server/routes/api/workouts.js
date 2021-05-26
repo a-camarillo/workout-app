@@ -1,5 +1,6 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const { ObjectID } = require('mongodb').ObjectID;
 require('dotenv').config();
 
 const uri = process.env.MONGO_URI;
@@ -20,14 +21,17 @@ router.get('/', async (req, res) => {
 // Post Workout
 router.post('/', async (req, res) => {
 	const workouts = await loadWorkoutsCollection();
-	await workouts.inserOne({});
+	await workouts.insertOne({
+		workout: req.body.exercises,
+		createdAt: new Date(),
+	});
 	res.status(201).send();
 });
 
 // Delete Workout
 router.delete('/:id', async (req, res) => {
 	const workouts = await loadWorkoutsCollection();
-	await workouts.deleteOne({_id: new mongodb.ObjectID(req.params.id)});
+	await workouts.deleteOne({_id: new ObjectID(req.params.id)});
 	res.status(200).send();
 });
 

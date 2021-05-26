@@ -1,5 +1,6 @@
 <template>
-  <Exercise/>
+  <router-link to="/new-workout">Create Workout</router-link>
+  <router-link to="/workouts">View Workouts</router-link>
 </template>
 
 

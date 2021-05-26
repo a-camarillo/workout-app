@@ -21,11 +21,13 @@
       <button @click="removeExercise(exercise.id)">Remove</button>
       <button id="editButton" @click="editExercise(exercise.id)">Edit</button>
     </div>
+	<button @click="saveWorkout">Save Workout</button>
   </div>
 </template>
 
 <script>
 import Set from './Set.vue'
+import Service from '../Service.js'
 
 export default {
     components: { Set },
@@ -63,7 +65,10 @@ export default {
         } else {
           this.$refs[`exerciseDiv-${exerciseId}`].children.editButton.innerText = "Edit"
         }
-      }
+      },
+      async saveWorkout() {
+	await Service.insertWorkout(this.exercises);
+	}
     },
     data() {
       return {
