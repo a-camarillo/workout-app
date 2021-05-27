@@ -1,8 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Exercise from '../components/Exercise.vue'
 import Workouts from '../views/Workouts.vue'
+import Home from '../views/Home.vue'
 
 const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
   {
     path: '/new-workout',
     name: 'createWorkout',
