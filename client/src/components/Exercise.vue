@@ -4,12 +4,12 @@
         <label>Exercise: </label>
         <input type="text" id="exerciseName" required v-model="newExercise.name" />
         <label>Focus: </label>
-        <input id="exerciseType" required v-model="newExercise.type" />
-        <button id="saveButton" @click="addExercise">Add Exercise</button>
+        <input id="exerciseType" required v-model="newExercise.type" /><br>
+        <button id="addExerciseButton" @click="addExercise">Add Exercise</button>
     </div>
     <div :key="`exercise-${exercise.id}`" v-for="exercise in exercises" :ref="`exerciseDiv-${exercise.id}`">
-      <hr/>
-      <div :class="{hidden: !exercise.isExerciseInEdit}">
+    <hr/>
+    <div :class="{hidden: !exercise.isExerciseInEdit}">
         <label >Exercise: </label>
         <input type="text" id="exerciseName" required v-model ="exercise.name" />
         <label >Focus: </label>
@@ -17,15 +17,17 @@
       </div>
       <h2>{{exercise.name}}</h2>
       <h4>{{exercise.type}}</h4>
-      <Set v-model:sets="exercise.sets"/>
+      <Set v-model:sets="exercise.sets"/><br>
       <button @click="removeExercise(exercise.id)">Remove</button>
       <button id="editButton" @click="editExercise(exercise.id)">Edit</button>
     </div>
+	<button @click="saveWorkout">Save Workout</button>
   </div>
 </template>
 
 <script>
 import Set from './Set.vue'
+import Service from '../Service.js'
 
 export default {
     components: { Set },
@@ -63,7 +65,10 @@ export default {
         } else {
           this.$refs[`exerciseDiv-${exerciseId}`].children.editButton.innerText = "Edit"
         }
-      }
+      },
+      async saveWorkout() {
+	await Service.insertWorkout(this.exercises);
+	}
     },
     data() {
       return {
@@ -122,16 +127,19 @@ export default {
 }
 </script>
 
-<style >
+<style>
 h2 {
   font-size: 1.5rem;
+  margin: .25em 0 .25em 0;
 }
-
 h4 {
   font-size: 1.25rem;
+  margin: .25em 0 .25em 0;
 }
-
 .hidden label, .hidden input {
-    display:none;
+  display: none;
+}
+#addExerciseButton {
+  margin: 1em 0 1em 0;
 }
 </style>
