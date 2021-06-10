@@ -14,7 +14,7 @@
         <input type="text" id="exerciseName" required v-model ="exercise.name" />
         <label >Focus: </label>
         <input id="exerciseType" required v-model="exercise.type"/>
-      </div>
+    </div>
       <h2>{{exercise.name}}</h2>
       <h4>{{exercise.type}}</h4>
       <Set v-model:sets="exercise.sets"/><br>
@@ -67,8 +67,8 @@ export default {
         }
       },
       async saveWorkout() {
-	await Service.insertWorkout(this.exercises);
-	}
+	      await Service.insertWorkout(this.exercises);
+	    }
     },
     data() {
       return {

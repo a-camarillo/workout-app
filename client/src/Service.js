@@ -6,26 +6,15 @@ class Service {
 
 	// Get Workouts
 	static getWorkouts() {
-		return new Promise(async (resolve, reject) => {
-			try {
-			const res = axios.get(url);
-			const data = res.data;
-			resolve(
-				data.map(exercises => ({
-				...exercises,
-				createdAt: new Date(exercises.createdAt)
-				}))
-			);
-	} catch(err) {
-		reject(err);
-	  }
-	 })
-	}
+		return axios.get(url)
+					// .then(res => res.data)
+					// .catch(err)
+	 	}
+
 	// Create Workouts
 	static insertWorkout(exercises) {
 		return axios.post(url, {
 			exercises
-			//some payload data
 		});	
 	}
 
