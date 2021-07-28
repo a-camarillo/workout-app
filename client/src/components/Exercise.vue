@@ -67,8 +67,12 @@ export default {
         }
       },
       async saveWorkout() {
-	      await Service.insertWorkout(this.exercises);
-	    }
+	      try {
+          await Service.insertWorkout(this.exercises);
+	      } catch(err) {
+          console.log(err.message)
+          }
+        }
     },
     data() {
       return {
@@ -84,43 +88,12 @@ export default {
            * exercise
            * {
            *   name: String,
-           *   id: Number,
+           *   id: String,
            *   type: String,
            *   sets: Array,
            *   isExerciseInEdit: Boolean
            * }
-           * 
-           */
-         {
-            name: 'Bicep Curls',
-            id: '_h4y171fk7gc',
-            type: 'Biceps',
-            sets: [{
-              weight: 0,
-              reps: 0,
-            }],
-            isExerciseInEdit: false,
-         },
-                  {
-            name: 'Squats',
-            id: '_um01cx0mhk',
-            type: 'Legs',
-            sets: [{
-              weight: 0,
-              reps: 0,
-            }],
-            isExerciseInEdit: false,
-         },
-                  {
-            name: 'Pushups',
-            id: '_rn4vdev3g9',
-            type: 'Triceps',
-            sets: [{
-              weight: 0,
-              reps: 0,
-            }],
-            isExerciseInEdit: false,
-         }
+           **/ 
         ],
       }
     }

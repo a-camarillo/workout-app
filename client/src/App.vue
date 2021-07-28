@@ -1,7 +1,6 @@
 <template>
   <div>
-  <router-link to="/new-workout">Create Workout</router-link>
-  <router-link to="/workouts">View Workouts</router-link>
+  <router-link to="/">Home</router-link>
   </div>
   <router-view/>
 </template>
@@ -37,5 +36,18 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
 }
 </style>
