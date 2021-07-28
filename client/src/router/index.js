@@ -16,7 +16,7 @@ const routes = [
   },
   {
     path: '/workouts',
-    name: 'viewWorkouts,
+    name: 'viewWorkouts',
     component: Workouts
   }
 ]
