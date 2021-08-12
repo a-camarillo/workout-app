@@ -2,7 +2,9 @@
 <div>
     <div id="workout" :key="workout._id" v-for="workout in workouts">
         <h2>Workout: {{ new Date(workout.createdAt).getMonth() }}/{{ new Date(workout.createdAt).getDay() }}/{{ new Date(workout.createdAt).getFullYear() }} - {{ new Date(workout.createdAt).getHours() }}:{{ new Date(workout.createdAt).getMinutes() }}:{{ new Date(workout.createdAt).getSeconds() }}</h2>
-        <button @click="isModalOpen=!isModalOpen">x</button>
+        <button id="deleteButton" @click="isModalOpen=!isModalOpen">
+            <img src="../assets/trashcan.png">    
+        </button>
             <div :class="{hidden: !isModalOpen}">
                 <div class="overlay">
                     <div class="modal">
@@ -69,9 +71,19 @@ export default {
 
 #workout {
     border-style: solid;
+    position: relative;
 }
+
 .hidden {
   display: none;
+}
+
+#deleteButton, #deleteButton:hover {
+    position: absolute;
+    background-color: #82b4ff;
+    cursor: pointer;
+    top: 10px;
+    right: 10px;
 }
 
 .modal {

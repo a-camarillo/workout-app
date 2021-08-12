@@ -1,6 +1,8 @@
 <template>
   <div>
-  <router-link to="/">Home</router-link>
+    <div class="heading">
+      <router-link to="/"><h1>Workout App</h1></router-link>
+    </div>
   </div>
   <router-view/>
 </template>
@@ -13,33 +15,39 @@ export default {
   name: 'App',
   components: { Exercise }
 }
-
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
+.heading {
+  position: sticky;
+  width: 100%;
+  padding: 5px 0 5px;
+  top: 0;
+  color: white;
+  background: #82868c;
+  text-align: left; 
+}
+
+body {
+  background-color: #82b4ff;
+  margin: 0;
+}
+
 #nav {
   padding: 30px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 
 a {
   text-decoration: none;
+  color: #2c3e50;
 }
 
 a:hover {
@@ -48,6 +56,9 @@ a:hover {
 
 a:visited {
   text-decoration: none;
-  color: black;
+}
+
+.heading a, .heading a:visited {
+  color: white;
 }
 </style>

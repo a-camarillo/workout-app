@@ -9,19 +9,21 @@
     </div>
     <div :key="`exercise-${exercise.id}`" v-for="exercise in exercises" :ref="`exerciseDiv-${exercise.id}`">
     <hr/>
-    <div :class="{hidden: !exercise.isExerciseInEdit}">
-        <label >Exercise: </label>
-        <input type="text" id="exerciseName" required v-model ="exercise.name" />
-        <label >Focus: </label>
-        <input id="exerciseType" required v-model="exercise.type"/>
-    </div>
+      <div :class="{hidden: !exercise.isExerciseInEdit}">
+          <label >Exercise: </label>
+          <input type="text" id="exerciseName" required v-model ="exercise.name" />
+          <label >Focus: </label>
+          <input id="exerciseType" required v-model="exercise.type"/>
+      </div>
       <h2>{{exercise.name}}</h2>
       <h4>{{exercise.type}}</h4>
       <Set v-model:sets="exercise.sets"/><br>
-      <button @click="removeExercise(exercise.id)">Remove</button>
-      <button id="editButton" @click="editExercise(exercise.id)">Edit</button>
+      <button class="setButton" @click="removeExercise(exercise.id)">Remove</button>
+      <button class="setButton" @click="editExercise(exercise.id)">Edit</button>
     </div>
-	<button @click="saveWorkout">Save Workout</button>
+  <router-link to="/">
+	  <button @click="saveWorkout">Save Workout</button>
+  </router-link>  
   </div>
 </template>
 
@@ -114,5 +116,14 @@ h4 {
 }
 #addExerciseButton {
   margin: 1em 0 1em 0;
+}
+
+#exercise {
+  margin: 10px;
+  font-family: Helvetica, sans-serif;
+}
+
+.setButton {
+  margin: 5px 5px 20px;
 }
 </style>
