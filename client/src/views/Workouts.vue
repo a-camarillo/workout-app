@@ -1,8 +1,9 @@
 <template>
 <div>
-    <div id="workout" :key="workout._id" v-for="workout in workouts">
+    <div id="workout" :key="`workout-${workout._id}`" v-for="workout in workouts" :refs="workout">
         <h2>Workout: {{ new Date(workout.createdAt).getMonth() }}/{{ new Date(workout.createdAt).getDay() }}/{{ new Date(workout.createdAt).getFullYear() }} - {{ new Date(workout.createdAt).getHours() }}:{{ new Date(workout.createdAt).getMinutes() }}:{{ new Date(workout.createdAt).getSeconds() }}</h2>
-        <button id="deleteButton" @click="isModalOpen=!isModalOpen">
+        <h3> {{ workout._id }}</h3>
+        <button id="deleteButton" @click="isModalOpen=!isModalOpen; testMethod(workout._id);">
             <img src="../assets/trashcan.png">    
         </button>
             <div :class="{hidden: !isModalOpen}">
@@ -10,7 +11,7 @@
                     <div class="modal">
                         <p>Are you sure you want to remove this workout?</p>
                         <button @click="removeWorkout(workout._id); isModalOpen=!isModalOpen;">Yes</button>
-                        <button @click="isModalOpen=!isModalOpen;">No</button>
+                        <button @click="isModalOpen=!isModalOpen;testMethod(workout._id)">No</button>
                     </div>
                 </div>
             </div>
@@ -49,6 +50,7 @@ export default {
             }
         },
         async removeWorkout(id) {
+            console.log(id)
             try {
                 this.workouts = this.workouts.filter(workout => {
                     return workout._id !== id 
@@ -60,8 +62,8 @@ export default {
                 console.log(this.error)
             }
         },
-        showModal() {
-
+        testMethod(id) {
+            console.log(id)
         },
     }
 }
