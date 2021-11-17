@@ -2,9 +2,11 @@
   <div>
     <div class="heading">
       <router-link to="/"><h1>Workout App</h1></router-link>
+      <router-link to="/workouts"><h3>View Workouts</h3></router-link>
+      <router-link to="/new-workout"><h3>Create New Workout</h3></router-link> 
     </div>
-  </div>
   <router-view/>
+  </div>
 </template>
 
 
@@ -27,12 +29,26 @@ export default {
 
 .heading {
   position: sticky;
-  width: 100%;
-  padding: 5px 0 5px;
+  width: auto;
+  padding: 5px 0 5px 5px;
   top: 0;
   color: white;
   background: #82868c;
-  text-align: left; 
+  text-align: left;
+  z-index: 1; 
+}
+
+.heading h1 {
+  font-size: 50px;
+  display: inline;
+  padding: 5px 10px 5px 5px;
+}
+
+.heading h3 {
+  justify-content: center;
+  align-content: center;
+  display: inline;
+  padding: 5px 10px 5px 5px;
 }
 
 body {
