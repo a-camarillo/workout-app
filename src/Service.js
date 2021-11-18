@@ -7,8 +7,8 @@ class Service {
 	// Get Workouts
 	static getWorkouts() {
 		return axios.get(url)
-					.then(res => res.data)
-					// .catch(err)
+					.then(res => res.data);
+					// .catch((err) => console.log(err))
 	 	}
 
 	// Create Workouts
