@@ -1,0 +1,39 @@
+{
+  "name": "workout-app",
+  "version": "1.0.0",
+  "description": "App for tracking weightlifting progress",
+  "main": "index.js",
+  "engines": {
+    "node": "16.13.0"
+  },
+  "scripts": {
+    "start": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-camarillo/workout-app.git"
+  },
+  "author": "Anthony Camarillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/a-camarillo/workout-app/issues"
+  },
+  "homepage": "https://github.com/a-camarillo/workout-app#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@vue/babel-preset-app": "^4.5.12",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "2.x.x"
+  }
+}
