@@ -1,16 +1,16 @@
-import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Base from './Base';
 import Typography from '@mui/material/Typography';
 
-function Home() {
+const Home = () => {
 	return (
-		<AppBar>
-			<Typography variant="h3" component="div">
-				Workout Tracker
-			</Typography>
-			<Typography variant="h4" component="div">
-				Workouts 
-			</Typography>
-		</AppBar>
+		<Base>
+			<Box>
+				<Typography>
+					Hello World
+				</Typography>
+			</Box>
+		</Base>	
 	)
 }
 
