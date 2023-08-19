@@ -8,6 +8,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckCircle from '@mui/icons-material/CheckCircle';
 import { ChangeEvent, MouseEvent, useState } from 'react';
@@ -22,6 +24,7 @@ const Exercise = () => {
 	const [exerciseInputVisibility, setExerciseInputVisibility] = useState('none')
 	const [editIconVisibility, setEditIconVisibility] = useState('inline')
 	const [confirmIconVisibility, setConfirmIconVisibility] = useState('none')
+	const [listSets, setListSets] = useState([<Set></Set>])
 
 	
 	const handleEditClick = (click: MouseEvent) => {
@@ -42,6 +45,14 @@ const Exercise = () => {
 		setExerciseLabelVisibility('inline')
 		setEditIconVisibility('inline')
 		setConfirmIconVisibility('none')
+	}
+
+	const handleAddSetClick = () => {
+		setListSets(listSets.concat([<Set></Set>]))
+	}
+
+	const handleRemoveSetClick = () => {
+		setListSets(listSets.slice(0,-1))
 	}
 
 	return (
@@ -90,10 +101,20 @@ const Exercise = () => {
 			</AccordionSummary>
 			<AccordionDetails>
 				<Stack spacing={2}> 
-					<Set></Set>
-					<Set></Set>
-					<Set></Set>
-				</Stack>			
+					{listSets}
+				</Stack>	
+				<IconButton
+				aria-label='addSet'
+				onClick={handleAddSetClick}
+				>
+					<AddIcon/>	
+				</IconButton>
+				<IconButton
+				aria-label='removeSet'
+				onClick={handleRemoveSetClick}
+				>
+					<RemoveIcon/>	
+				</IconButton>
 			</AccordionDetails>
 		</Accordion>
 	</Box>
