@@ -8,6 +8,9 @@ const NavBar = () => {
 				sx={{
 					backgroundColor: '#0D5D56',
 					padding: '1rem',
+					margin: 'auto',
+					marginTop: '0px',
+					position: 'sticky',
 				}}
 			>
 				<Grid

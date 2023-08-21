@@ -59,7 +59,7 @@ const Exercise = () => {
 	<Box 
 	sx={{
 		mx: 'auto',
-		padding: 20,
+		padding: '5px',
 		maxWidth: '60ch',
 	}}>
 		<Accordion>

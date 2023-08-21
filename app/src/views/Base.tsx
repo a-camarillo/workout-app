@@ -11,10 +11,12 @@ const Base = (props: { children: ReactNode }) => {
 				minHeight: '100vh',
 			}}
 		>
-		<Grid container>
-			<NavBar />
-			{props.children}
-		</Grid>
+			<Grid container>
+				<Grid container>
+					<NavBar />
+						{props.children}
+				</Grid>
+			</Grid>
 		</Grid>
 	)
 }
