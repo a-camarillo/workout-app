@@ -7,7 +7,7 @@ const Base = (props: { children: ReactNode }) => {
 		<Grid
 			container
 			sx={{
-				backgroundColor: '#8FD5A6',
+				backgroundColor: '#1F1B24',
 				minHeight: '100vh',
 			}}
 		>

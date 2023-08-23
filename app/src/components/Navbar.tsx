@@ -6,7 +6,7 @@ const NavBar = () => {
 	return (
 			<AppBar
 				sx={{
-					backgroundColor: '#0D5D56',
+					backgroundColor: '#2E2E2D',
 					padding: '1rem',
 					margin: 'auto',
 					marginTop: '0px',

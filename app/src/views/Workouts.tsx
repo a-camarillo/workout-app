@@ -5,16 +5,18 @@ import AddExercise from '../components/AddExercise';
 import { useState } from 'react';
 
 const Workouts = () => {
-	const [listExercises, setListExercises] = useState([<Exercise></Exercise>])
+	const [listExercises, setListExercises] = useState([{}])
 
 	const handleAddExerciseClick = (): void => {
-		setListExercises(listExercises.concat([<Exercise></Exercise>]))	
+		setListExercises(listExercises.concat([{}]))	
 	}
 
 	return (
 		<Base>
 			<Box>
-				{ listExercises }
+				{ listExercises.map((exercise, index) => 
+					<Exercise key={index} />
+				)}
 				<AddExercise clickFunction={handleAddExerciseClick}></AddExercise>
 			</Box>
 		</Base>

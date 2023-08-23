@@ -1,12 +1,25 @@
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import Input from '@mui/material/Input'
-import InputLabel from '@mui/material/InputLabel'
-import Grid from '@mui/material/Grid'
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
-const Set = () => {
-	return (
+type SetProps = {
+	reps: number;	
+	weight: number;	
+	unit: string;
+//	handleUnitChange: (event: SelectChangeEvent) => void;
+};
+
+const Set = ({
+		reps,
+		weight,
+		unit,
+	//handleUnitChange,
+		}: SetProps) => {	
+	return (	
 		<Grid container spacing={2}>
 			<Grid item>
 				<FormControl>
@@ -34,12 +47,9 @@ const Set = () => {
 				</FormControl>
 			</Grid>
 			<Grid item>
-				<FormControl>
-					<Select>
-						<MenuItem value={'lb'}>lb</MenuItem>
-						<MenuItem value={'kg'}>kg</MenuItem>
-					</Select>
-				</FormControl>
+				<Typography>
+						{unit}
+				</Typography>
 			</Grid>
 		</Grid>
 	)

@@ -13,6 +13,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import EditIcon from '@mui/icons-material/Edit';
 import CheckCircle from '@mui/icons-material/CheckCircle';
 import { ChangeEvent, MouseEvent, useState } from 'react';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 
 // TODO: low prio
@@ -24,9 +26,7 @@ const Exercise = () => {
 	const [exerciseInputVisibility, setExerciseInputVisibility] = useState('none')
 	const [editIconVisibility, setEditIconVisibility] = useState('inline')
 	const [confirmIconVisibility, setConfirmIconVisibility] = useState('none')
-	const [listSets, setListSets] = useState([<Set></Set>])
-
-	
+		
 	const handleEditClick = (click: MouseEvent) => {
 		click.stopPropagation();
 		setExerciseLabelVisibility('none')
@@ -46,13 +46,35 @@ const Exercise = () => {
 		setEditIconVisibility('inline')
 		setConfirmIconVisibility('none')
 	}
+	
+	/*	Set Logic 
+	 */
+	
+	const setObject = {
+						unit: 'kg',
+						sets: [{
+						data: {
+							reps: 0,
+							weight: 0,
+							},
+						}]
+					}
+
+
+	const [listSets, setListSets] = useState(setObject.sets)
+	const [unit, setUnit] = useState(setObject.unit)
 
 	const handleAddSetClick = () => {
-		setListSets(listSets.concat([<Set></Set>]))
+		setListSets(listSets.concat({data: {reps: 0, weight: 0,}}))
 	}
 
 	const handleRemoveSetClick = () => {
 		setListSets(listSets.slice(0,-1))
+	}
+
+	const handleUnitChange = (event: SelectChangeEvent) => {
+		event.stopPropagation()
+		setUnit(event.target.value)
 	}
 
 	return (
@@ -60,7 +82,7 @@ const Exercise = () => {
 	sx={{
 		mx: 'auto',
 		padding: '5px',
-		maxWidth: '60ch',
+		minWidth: '60ch',
 	}}>
 		<Accordion>
 			<AccordionSummary
@@ -98,10 +120,20 @@ const Exercise = () => {
 					}}>
 						<CheckCircle />
 					</IconButton>
+					<Select
+					aria-label='unit'
+					value={unit}
+					onChange={handleUnitChange}
+					>
+						<MenuItem value='kg'>kg</MenuItem>
+						<MenuItem value='lb'>lb</MenuItem>
+					</Select>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Stack spacing={2}> 
-					{listSets}
+					{listSets.map((set, index) =>
+						<Set key={index} reps={set.data.reps} weight={set.data.weight} unit={unit} />
+					)}
 				</Stack>	
 				<IconButton
 				aria-label='addSet'
