@@ -10,11 +10,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import EditIcon from '@mui/icons-material/Edit';
-import CheckCircle from '@mui/icons-material/CheckCircle';
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import LabelEdit from './LabelEdit';
 
 
 // TODO: low prio
@@ -24,27 +23,17 @@ const Exercise = () => {
 	const [exerciseLabel, setExerciseLabel] = useState('Exercise');
 	const [exerciseLabelVisibility, setExerciseLabelVisibility] = useState('inline')
 	const [exerciseInputVisibility, setExerciseInputVisibility] = useState('none')
-	const [editIconVisibility, setEditIconVisibility] = useState('inline')
-	const [confirmIconVisibility, setConfirmIconVisibility] = useState('none')
 		
-	const handleEditClick = (click: MouseEvent) => {
-		click.stopPropagation();
-		setExerciseLabelVisibility('none')
-		setExerciseInputVisibility('inline')
-		setEditIconVisibility('none')
-		setConfirmIconVisibility('inline')
-	}
-
 	const handleLabelChange = (input: ChangeEvent<HTMLInputElement>) => {
 		setExerciseLabel(input.target.value)
 	}
 
-	const handleConfirmationClick = (click: MouseEvent) => {
-		click.stopPropagation();
-		setExerciseInputVisibility('none')
-		setExerciseLabelVisibility('inline')
-		setEditIconVisibility('inline')
-		setConfirmIconVisibility('none')
+	/* Edit/Confirmation Button Logic */
+	const [edit, setEdit] = useState(false)
+
+	const handleLabelEdit = (click: MouseEvent) => {
+		click.stopPropagation()
+		setEdit(!edit)
 	}
 	
 	/*	Set Logic 
@@ -103,23 +92,7 @@ const Exercise = () => {
 				>
 					{exerciseLabel}
 				</Typography>
-					<IconButton 
-					aria-label='edit'
-					onClick={(e) => handleEditClick(e)}
-					sx={{
-						display: editIconVisibility
-					}}>
-
-						<EditIcon />
-					</IconButton>
-					<IconButton
-					aria-label='edit'
-					onClick={(e) => handleConfirmationClick(e)}
-					sx={{
-						display: confirmIconVisibility
-					}}>
-						<CheckCircle />
-					</IconButton>
+					<LabelEdit isEditing={edit} clickHandler={handleLabelEdit} />
 					<Select
 					aria-label='unit'
 					value={unit}
