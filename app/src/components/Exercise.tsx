@@ -1,8 +1,6 @@
 import Set from './Set';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/system/Box';
-import Typography from '@mui/material/Typography';
-import Input from '@mui/material/Input';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -13,29 +11,13 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import LabelEdit from './LabelEdit';
+import ExerciseLabel from './ExerciseLabel';
 
 
 // TODO: low prio
 // work on transition from exercise label to input
 
-const Exercise = () => {
-	const [exerciseLabel, setExerciseLabel] = useState('Exercise');
-	const [exerciseLabelVisibility, setExerciseLabelVisibility] = useState('inline')
-	const [exerciseInputVisibility, setExerciseInputVisibility] = useState('none')
-		
-	const handleLabelChange = (input: ChangeEvent<HTMLInputElement>) => {
-		setExerciseLabel(input.target.value)
-	}
-
-	/* Edit/Confirmation Button Logic */
-	const [edit, setEdit] = useState(false)
-
-	const handleLabelEdit = (click: MouseEvent) => {
-		click.stopPropagation()
-		setEdit(!edit)
-	}
-	
+const Exercise = () => {	
 	/*	Set Logic 
 	 */
 	
@@ -77,30 +59,15 @@ const Exercise = () => {
 			<AccordionSummary
 				expandIcon={<ExpandMoreIcon />}
 			>
-				<Input 
-				sx={{
-					display: exerciseInputVisibility
-				}}
-				onClick={(e) => e.stopPropagation()}
-				onChange={handleLabelChange}
-				/>
-				<Typography 
-				variant='h5'
-				sx={{
-					display: exerciseLabelVisibility
-				}}
+				<ExerciseLabel />
+				<Select
+				aria-label='unit'
+				value={unit}
+				onChange={handleUnitChange}
 				>
-					{exerciseLabel}
-				</Typography>
-					<LabelEdit isEditing={edit} clickHandler={handleLabelEdit} />
-					<Select
-					aria-label='unit'
-					value={unit}
-					onChange={handleUnitChange}
-					>
-						<MenuItem value='kg'>kg</MenuItem>
-						<MenuItem value='lb'>lb</MenuItem>
-					</Select>
+					<MenuItem value='kg'>kg</MenuItem>
+					<MenuItem value='lb'>lb</MenuItem>
+				</Select>
 			</AccordionSummary>
 			<AccordionDetails>
 				<Stack spacing={2}> 
