@@ -1,18 +1,15 @@
 import Set from './Set';
+import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/system/Box';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import ExerciseLabel from './ExerciseLabel';
-
+import AddRemove from './AddRemove';
 
 // TODO: low prio
 // work on transition from exercise label to input
@@ -49,47 +46,35 @@ const Exercise = () => {
 	}
 
 	return (
-	<Box 
-	sx={{
-		mx: 'auto',
-		padding: '5px',
-		minWidth: '60ch',
-	}}>
-		<Accordion>
-			<AccordionSummary
-				expandIcon={<ExpandMoreIcon />}
-			>
-				<ExerciseLabel />
-				<Select
-				aria-label='unit'
-				value={unit}
-				onChange={handleUnitChange}
+		<Grid item 
+		sx={{
+			mx: 'auto',
+			padding: '5px',
+		}}>
+			<Accordion>
+				<AccordionSummary
+					expandIcon={<ExpandMoreIcon />}
 				>
-					<MenuItem value='kg'>kg</MenuItem>
-					<MenuItem value='lb'>lb</MenuItem>
-				</Select>
-			</AccordionSummary>
-			<AccordionDetails>
-				<Stack spacing={2}> 
-					{listSets.map((set, index) =>
-						<Set key={index} reps={set.data.reps} weight={set.data.weight} unit={unit} />
-					)}
-				</Stack>	
-				<IconButton
-				aria-label='addSet'
-				onClick={handleAddSetClick}
-				>
-					<AddIcon/>	
-				</IconButton>
-				<IconButton
-				aria-label='removeSet'
-				onClick={handleRemoveSetClick}
-				>
-					<RemoveIcon/>	
-				</IconButton>
-			</AccordionDetails>
-		</Accordion>
-	</Box>
+					<ExerciseLabel />
+					<Select
+					aria-label='unit'
+					value={unit}
+					onChange={handleUnitChange}
+					>
+						<MenuItem value='kg'>kg</MenuItem>
+						<MenuItem value='lb'>lb</MenuItem>
+					</Select>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Stack spacing={2}> 
+						{listSets.map((set, index) =>
+							<Set key={index} reps={set.data.reps} weight={set.data.weight} unit={unit} />
+						)}
+					</Stack>
+					<AddRemove addHandler={handleAddSetClick} removeHandler={handleRemoveSetClick}/>
+				</AccordionDetails>
+			</Accordion>
+		</Grid>
 	)
 }
 

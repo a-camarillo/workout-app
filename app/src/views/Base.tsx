@@ -14,7 +14,9 @@ const Base = (props: { children: ReactNode }) => {
 			<Grid container>
 				<Grid container>
 					<NavBar />
+					<Grid container sx={{justifyContent: 'center'}}>
 						{props.children}
+					</Grid>
 				</Grid>
 			</Grid>
 		</Grid>
