@@ -1,4 +1,4 @@
-import Exercise from '../components/Exercise';
+import ExerciseForm from '../components/ExerciseForm';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Base from './Base';
@@ -18,9 +18,13 @@ const Workouts = () => {
 
 	return (
 		<Base>
-			<Stack>
+			<Stack 
+				sx={{
+					minWidth: '60%',
+				}}
+			>
 				{ listExercises.map((exercise, index) => 
-					<Exercise key={index} />
+					<ExerciseForm key={index} />
 				)}
 				<AddRemove addHandler={handleAddExerciseClick} removeHandler={handleRemoveExerciseClick}/>
 			</Stack>

@@ -20,7 +20,7 @@ const Set = ({
 	//handleUnitChange,
 		}: SetProps) => {	
 	return (	
-		<Grid container spacing={2}>
+		<Grid container spacing={2} alignItems='center' justifyContent='center'>
 			<Grid item>
 				<FormControl>
 					<InputLabel>Reps</InputLabel>
