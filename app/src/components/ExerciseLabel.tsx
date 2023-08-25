@@ -21,23 +21,31 @@ const ExerciseLabel = () => {
 
 	if (!edit) {
 	return (
-		<Grid item>
-			<Typography 
-			variant='h5'
-			>
-				{exerciseLabel}
-			</Typography>
-			<LabelEdit isEditing={edit} clickHandler={handleLabelEdit} />
+		<Grid container>
+			<Grid item>
+				<Typography 
+				variant='h5'
+				>
+					{exerciseLabel}
+				</Typography>
+			</Grid>
+			<Grid item>
+				<LabelEdit isEditing={edit} clickHandler={handleLabelEdit} />
+			</Grid>
 		</Grid>
 		)
 	}
 	return (
-		<Grid item>
-			<Input 
-			onClick={(e) => e.stopPropagation()}
-			onChange={handleLabelChange}
-			/>
-			<LabelEdit isEditing={edit} clickHandler={handleLabelEdit} />
+		<Grid container>
+			<Grid item>
+				<Input 
+				onClick={(e) => e.stopPropagation()}
+				onChange={handleLabelChange}
+				/>
+			</Grid>
+			<Grid item>
+				<LabelEdit isEditing={edit} clickHandler={handleLabelEdit} />
+			</Grid>
 		</Grid>
 	)
 }
