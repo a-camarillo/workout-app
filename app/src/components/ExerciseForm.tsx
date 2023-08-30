@@ -62,14 +62,6 @@ const ExerciseForm = () => {
 					expandIcon={<ExpandMoreIcon />}
 				>
 					<ExerciseLabel />
-					<Select
-					aria-label='unit'
-					value={unit}
-					onChange={handleUnitChange}
-					>
-						<MenuItem value='kg' onClick={(e) => e.stopPropagation()}>kg</MenuItem>
-						<MenuItem value='lb' onClick={(e) => e.stopPropagation()}>lb</MenuItem>
-					</Select>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Stack spacing={2}> 
