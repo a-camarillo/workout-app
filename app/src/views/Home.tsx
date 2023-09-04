@@ -1,17 +1,14 @@
+import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Base from './Base';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
 const Home = () => {
 	return (
 		<Base>
 			<Box>
-				<Button href='new-workout' variant='outlined'>
-					<Typography>
-						Create a new workout
-					</Typography>
-				</Button>
+				<Typography variant='h1' color='primary'>
+					Welcome to the workout app
+				</Typography>
 			</Box>
 		</Base>	
 	)
