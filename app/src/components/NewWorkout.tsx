@@ -1,11 +1,10 @@
 import ExerciseForm from '../components/ExerciseForm';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Base from './Base';
 import AddRemove from '../components/AddRemove';
+import Grid from '@mui/material/Grid';
 import { useState } from 'react';
 
-const Workouts = () => {
+const NewWorkout = () => {
 	const [listExercises, setListExercises] = useState([{}])
 
 	const handleAddExerciseClick = (): void => {
@@ -17,19 +16,19 @@ const Workouts = () => {
 	}
 
 	return (
-		<Base>
+		<Grid container>
 			<Stack 
 				sx={{
 					minWidth: '60%',
 				}}
 			>
-				{ listExercises.map((exercise, index) => 
+				{ listExercises.map((_, index) => 
 					<ExerciseForm key={index} />
 				)}
 				<AddRemove addHandler={handleAddExerciseClick} removeHandler={handleRemoveExerciseClick}/>
 			</Stack>
-		</Base>
+		</Grid>
 	)
 }
 
-export default Workouts;
+export default NewWorkout;

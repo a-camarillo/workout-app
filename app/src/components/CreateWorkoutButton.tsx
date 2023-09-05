@@ -1,9 +1,13 @@
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const CreateWorkoutButton = () => {
+type CreateWorkoutButtonProps = {
+	onClick: () => void,
+}
+
+const CreateWorkoutButton = (props: CreateWorkoutButtonProps) => {
 	return (
-		<Button href='new-workout' variant='outlined'>
+		<Button variant='contained' onClick={props.onClick}>
 			<Typography>
 				Create a new workout
 			</Typography>

@@ -5,7 +5,7 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import WorkoutDisplay from '../components/WorkoutDisplay';
 import CreateWorkoutDisplay from '../components/CreateWorkoutDisplay';
 import dayjs, { Dayjs } from 'dayjs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Workouts = () => {
 
@@ -17,35 +17,73 @@ const Workouts = () => {
 		} 			
 		return true
 	}
+
+	useEffect(() => {
+		
+	})
 			
 	const mockWorkout = [
 		{
-			workoutDate: dayjs('2023-08-30'),
-			title: 'Bench Press',
-			sets: [
+			workoutDate: dayjs('2023-09-04'),
+			exercises: [	
 				{
-					reps: 10,
-					weight: 100,
+					title: 'Bench Press',
+					sets: [
+						{
+							reps: 10,
+							weight: 100,
+						},
+						{
+							reps: 8,
+							weight: 135,
+						},
+					],
 				},
 				{
-					reps: 8,
-					weight: 135,
+					title: 'Shoulder Press',
+					sets: [
+						{
+							reps: 10,
+							weight: 100,
+						},
+						{
+							reps: 8,
+							weight: 135,
+						},
+					],
 				},
-			]
+			],
 		},
 		{
-			workoutDate: dayjs('2023-08-28'),
-			title: 'Squat',
-			sets: [
+			workoutDate: dayjs('2023-09-03'),
+			exercises: [	
 				{
-					reps: 10,
-					weight: 100,
+					title: 'Squat',
+					sets: [
+						{
+							reps: 10,
+							weight: 100,
+						},
+						{
+							reps: 8,
+							weight: 135,
+						},
+					],
 				},
 				{
-					reps: 8,
-					weight: 135,
+					title: 'Leg Press',
+					sets: [
+						{
+							reps: 10,
+							weight: 100,
+						},
+						{
+							reps: 8,
+							weight: 135,
+						},
+					],
 				},
-			]
+			],
 		},
 	]
 
@@ -63,8 +101,8 @@ const Workouts = () => {
 					minWidth: '60%',
 				}}
 			>
-			{mockWorkout.map((exercise) =>
-				<WorkoutDisplay isDateMatching={dateMatch(exercise.workoutDate)} exercise={exercise}/>
+			{mockWorkout.map((workout) =>
+				<WorkoutDisplay isDateMatching={dateMatch(workout.workoutDate)} workout={workout}/>
 			)}
 			<CreateWorkoutDisplay isDateMatching={dateMatch(dayjs())}/>
 			</Stack>
