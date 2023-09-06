@@ -16,11 +16,11 @@ const NewWorkout = () => {
 	}
 
 	return (
-		<Grid container>
-			<Stack 
-				sx={{
-					minWidth: '60%',
-				}}
+		<Grid item>
+			<Stack
+			sx={{
+				marginTop: 0,
+			}}
 			>
 				{ listExercises.map((_, index) => 
 					<ExerciseForm key={index} />

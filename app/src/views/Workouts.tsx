@@ -85,6 +85,37 @@ const Workouts = () => {
 				},
 			],
 		},
+		{
+			workoutDate: dayjs('2023-09-02'),
+			exercises: [	
+				{
+					title: 'Deadlift',
+					sets: [
+						{
+							reps: 10,
+							weight: 100,
+						},
+						{
+							reps: 8,
+							weight: 135,
+						},
+					],
+				},
+				{
+					title: 'Lateral Row',
+					sets: [
+						{
+							reps: 10,
+							weight: 100,
+						},
+						{
+							reps: 8,
+							weight: 135,
+						},
+					],
+				},
+			],
+		},
 	]
 
 	return (

@@ -16,7 +16,7 @@ const CreateWorkoutDisplay = ( { isDateMatching }: CreateWorkoutProps ) => {
 	}
 
 	return (
-		<Grid container
+		<Grid container item
 			justifyContent='center'
 			alignItems='center'
 		>	

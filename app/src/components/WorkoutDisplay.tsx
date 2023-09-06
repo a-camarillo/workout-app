@@ -8,10 +8,7 @@ type WorkoutDisplayProps = {
 
 const WorkoutDisplay = ({isDateMatching, workout}: WorkoutDisplayProps) => {
 	return (
-		<Grid item
-			sx={{
-				marginTop: '10px',
-		}}>
+		<Grid item>
 			{ isDateMatching && workout.exercises.map((exercise: any) => 
 				<ExerciseDisplay exercise={exercise}/>)}
 		</Grid>		

@@ -18,11 +18,11 @@ type ExerciseDisplayProps = {
 
 const ExerciseDisplay = ({ exercise }: ExerciseDisplayProps) => {
 	return (
-		<Accordion>
+		<Accordion sx={{ marginTop:0 }}>
 			<AccordionSummary
 				expandIcon={<ExpandMoreIcon />}
 			>
-				<Typography>
+				<Typography variant='subtitle1'>
 					{exercise.title}
 				</Typography>
 			</AccordionSummary>
