@@ -47,7 +47,7 @@ func (u *UserClient) CreateUser(ctx context.Context, username string, password s
 		return err
 	}
 
-	return err
+	return nil
 
 }
 
@@ -83,17 +83,17 @@ func (u *UserClient) UpdateUser(ctx context.Context, username string, userID pri
 	return nil
 }
 
-func (u *UserClient) DeleteUser(ctx context.Context, id primitive.ObjectID) error {
+func (u *UserClient) DeleteUser(ctx context.Context, userID primitive.ObjectID) error {
 	
 	usersCollection	:= u.client.Database("database").Collection("users")
 
-	_, err := usersCollection.DeleteOne(ctx, bson.M{"_id":id})
+	_, err := usersCollection.DeleteOne(ctx, bson.M{"_id":userID})
 
 	if err != nil {
 		return err
 	}
 
-	return err
+	return nil
 }
 
 
