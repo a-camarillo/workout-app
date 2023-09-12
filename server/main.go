@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -19,6 +20,8 @@ func main() {
 	})
 
 	r.Mount("/workouts", routes.WorkoutsRoutes())
-
-	http.ListenAndServe(":3333", r)
+	
+	if err := http.ListenAndServe(":3333", r); err != nil {
+		log.Fatal(err)
+	}
 }

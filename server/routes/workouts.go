@@ -1,23 +1,54 @@
 package routes
 
 import (
+	"context"
+	"encoding/json"
+	"log"
 	"net/http"
+	"time"
 
+	"github.com/a-camarillo/workout-app/server/db"
 	"github.com/go-chi/chi/v5"
 )
 
 func WorkoutsRoutes() chi.Router {
 
-	r := chi.NewRouter()
+	router := chi.NewRouter()
 	
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Get request made for workouts data\n"))
-	})
+	router.Post("/", func(w http.ResponseWriter, r *http.Request) {
+
+		var workout db.Workout
+
+		body := json.NewDecoder(r.Body)
+		
+		err := body.Decode(&workout)
+
+		// break out of function if there is a request error
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 	
+		client := db.OpenConnection()
+		
+		workoutClient := db.WorkoutClient{
+			Client: client,
+		}
 
-	r.Post("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Post request made for workouts data\n"))
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
+		err = workoutClient.CreateWorkout(ctx, workout.Exercises, workout.UserID)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			log.Print(err)
+		}
+
+		w.WriteHeader(http.StatusCreated)
+
+		defer client.Disconnect(context.Background())
+		
 	})
 
-	return r
+	return router
 }
