@@ -11,7 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func Config() {
+func OpenConnection() *mongo.Client {
 	if err := godotenv.Load(); err != nil {
 			log.Println("No .env file found")
 	}
@@ -24,10 +24,10 @@ func Config() {
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
 	
-	defer func() {
-		if err = client.Disconnect(ctx); err != nil {
-			panic(err)
-		}
-	}()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return client
 }
 
