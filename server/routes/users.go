@@ -4,16 +4,53 @@ import (
 	"context"
 	"encoding/json"
 	"log"
+
 	"net/http"
 	"time"
 
 	"github.com/a-camarillo/workout-app/server/db"
 	"github.com/go-chi/chi/v5"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func UsersRoutes() chi.Router {
 	
 	router := chi.NewRouter()
+
+	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+	
+		err := r.ParseForm()
+		if err != nil {
+			log.Print(err)
+			return
+		}
+
+		userName := r.Form["Username"][0]
+
+		client := db.OpenConnection()
+
+		userClient := db.UserClient{
+			Client: client,
+		}
+
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()	
+		
+		user, err := userClient.ReadUserByName(ctx, userName)
+		if err != nil {
+			log.Print(err)
+			return
+		}
+		
+		w.Header().Set("Content-Type", "application/json")
+		err = json.NewEncoder(w).Encode(&user)
+		if err != nil {
+			log.Print(err)
+		}
+
+		defer client.Disconnect(context.Background())
+
+	})
 
 	router.Post("/", func(w http.ResponseWriter, r *http.Request) {
 	
@@ -32,11 +69,18 @@ func UsersRoutes() chi.Router {
 		userClient := db.UserClient{
 			Client: client,
 		}
+
+		passwordBytes, err := bcrypt.GenerateFromPassword([]byte(user.Password), 12)
+		if err != nil {
+			log.Print(err)
+		}
+
+		passwordHash := string(passwordBytes)
 		
 		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 
-		err = userClient.CreateUser(ctx, user.Username, user.Password)
+		err = userClient.CreateUser(ctx, user.Username, passwordHash)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			log.Print(err)

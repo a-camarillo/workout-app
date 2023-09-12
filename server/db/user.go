@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"errors"
 
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
@@ -26,9 +27,9 @@ func (u *UserClient) CreateUser(ctx context.Context, username string, password s
 
 	usersCollection := u.Client.Database("database").Collection("users")
 
-	err := usersCollection.FindOne(ctx, bson.M{"username": username, "password": password}).Decode(&userCheck)
+	result := usersCollection.FindOne(ctx, bson.M{"username": username}).Decode(&userCheck)
 
-	if err == mongo.ErrNoDocuments {
+	if result == mongo.ErrNoDocuments {
 
 		newUser := User{
 			UserID: uuid.NewString(),
@@ -41,14 +42,11 @@ func (u *UserClient) CreateUser(ctx context.Context, username string, password s
 		if err != nil {
 			return err
 		}
-	}
-
-	if err != nil {
-		return err
+	} else {
+		return errors.New("username submitted already exists")
 	}
 
 	return nil
-
 }
 
 func (u *UserClient) ReadUser(ctx context.Context, username string, password string) (*User, error) {	
@@ -57,14 +55,24 @@ func (u *UserClient) ReadUser(ctx context.Context, username string, password str
 
 	usersCollection := u.Client.Database("database").Collection("users")
 
-	err := usersCollection.FindOne(ctx, bson.M{"username": username, "password": password}).Decode(&user)
+	result := usersCollection.FindOne(ctx, bson.M{"username": username, "password": password}).Decode(&user)
 
-	if err == mongo.ErrNoDocuments {
-		return nil, nil
+	if result == mongo.ErrNoDocuments {
+		return nil, errors.New("user could not be found, username or password are incorrect")
 	}
 
-	if err != nil {
-		return nil, err
+	return &user, nil
+}
+
+func (u *UserClient) ReadUserByName(ctx context.Context, username string) (*User, error) {		
+	var user User
+
+	usersCollection := u.Client.Database("database").Collection("users")
+
+	result := usersCollection.FindOne(ctx, bson.M{"username": username}).Decode(&user)
+
+	if result == mongo.ErrNoDocuments {
+		return nil, errors.New("user could not be found, username is incorrect or does not exist")
 	}
 
 	return &user, nil
