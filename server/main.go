@@ -20,6 +20,7 @@ func main() {
 	})
 
 	r.Mount("/workouts", routes.WorkoutsRoutes())
+	r.Mount("/users", routes.UsersRoutes())
 	
 	if err := http.ListenAndServe(":3333", r); err != nil {
 		log.Fatal(err)

@@ -17,14 +17,14 @@ type User struct {
 }
 
 type UserClient struct {
-	client *mongo.Client
+	Client *mongo.Client
 }
 
 func (u *UserClient) CreateUser(ctx context.Context, username string, password string) error {	
 	
 	var userCheck User
 
-	usersCollection := u.client.Database("database").Collection("users")
+	usersCollection := u.Client.Database("database").Collection("users")
 
 	err := usersCollection.FindOne(ctx, bson.M{"username": username, "password": password}).Decode(&userCheck)
 
@@ -55,7 +55,7 @@ func (u *UserClient) ReadUser(ctx context.Context, username string, password str
 	
 	var user User
 
-	usersCollection := u.client.Database("database").Collection("users")
+	usersCollection := u.Client.Database("database").Collection("users")
 
 	err := usersCollection.FindOne(ctx, bson.M{"username": username, "password": password}).Decode(&user)
 
@@ -72,7 +72,7 @@ func (u *UserClient) ReadUser(ctx context.Context, username string, password str
 
 func (u *UserClient) UpdateUser(ctx context.Context, username string, userID primitive.ObjectID) error {
 	
-	usersCollection := u.client.Database("database").Collection("users")
+	usersCollection := u.Client.Database("database").Collection("users")
 
 	_, err := usersCollection.UpdateOne(ctx, bson.D{{Key: "_id", Value: userID}}, bson.D{{Key: "$set", Value: bson.D{{Key: "username", Value: username}}}})
 
@@ -85,7 +85,7 @@ func (u *UserClient) UpdateUser(ctx context.Context, username string, userID pri
 
 func (u *UserClient) DeleteUser(ctx context.Context, userID primitive.ObjectID) error {
 	
-	usersCollection	:= u.client.Database("database").Collection("users")
+	usersCollection	:= u.Client.Database("database").Collection("users")
 
 	_, err := usersCollection.DeleteOne(ctx, bson.M{"_id":userID})
 
