@@ -50,13 +50,13 @@ func (w *WorkoutClient) CreateWorkout(ctx context.Context, exercises []Exercise,
 	return nil
 }
 
-func (w *WorkoutClient) ReadWorkout(ctx context.Context, userID string, workoutDate time.Time) (*Workout, error) {
+func (w *WorkoutClient) ReadWorkout(ctx context.Context, userID string) (*Workout, error) {
 	
 	var workout Workout
 
 	workoutCollections := w.Client.Database("database").Collection("workouts")
 
-	err := workoutCollections.FindOne(ctx, bson.M{"userId": userID, "createdAt": workoutDate}).Decode(&workout)
+	err := workoutCollections.FindOne(ctx, bson.M{"userID": userID}).Decode(&workout)
 
 	if err == mongo.ErrNoDocuments {
 		return nil, nil
