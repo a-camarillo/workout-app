@@ -53,11 +53,12 @@ func SignupRoutes() chi.Router {
 
 		tokenAuth := auth.NewTokenAuth()
 
-		tokenString := tokenAuth.GenerateToken(user.Username)
+		accessTokenString := tokenAuth.GenerateAccessToken(user.Username)
+		refreshTokenString := tokenAuth.GenerateRefreshToken()	
 
 		w.Header().Set("Content-Type", "applciation/json")
 		w.WriteHeader(http.StatusCreated)
-		err = json.NewEncoder(w).Encode(map[string]string{"token": tokenString})
+		err = json.NewEncoder(w).Encode(map[string]string{"accessToken": accessTokenString, "refreshToken": refreshTokenString})
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			log.Print(err)

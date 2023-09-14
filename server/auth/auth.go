@@ -3,6 +3,7 @@ package auth
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/joho/godotenv"
@@ -26,9 +27,28 @@ func NewTokenAuth() *TokenAuth {
 	}
 }
 
-func (t *TokenAuth) GenerateToken(username string) string {
+func (t *TokenAuth) GenerateAccessToken(username string) string {
 
-	_, tokenString, _ := t.Auth.Encode(map[string]interface{}{"name": username})
+	claims := map[string]interface{}{"name":username}
+	
+	jwtauth.SetIssuedNow(claims)
+	jwtauth.SetExpiryIn(claims, time.Minute)
+	
+
+	_, tokenString, _ := t.Auth.Encode(claims)
+
+	return tokenString
+}
+
+func (t *TokenAuth) GenerateRefreshToken() string {
+	
+	claims := map[string]interface{}{}
+
+	jwtauth.SetIssuedNow(claims)
+	jwtauth.SetExpiryIn(claims, 10*time.Minute)
+	
+
+	_, tokenString, _ := t.Auth.Encode(claims)
 
 	return tokenString
 }
